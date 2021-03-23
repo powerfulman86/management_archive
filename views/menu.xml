@@ -1,0 +1,149 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record id="view_transaction_type_form" model="ir.ui.view">
+            <field name="name">transaction.type.form</field>
+            <field name="model">transaction.type</field>
+            <field name="arch" type="xml">
+                <form string="Transaction Types">
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <group row="2">
+                            <group >
+                                <field name="active" invisible="1"/>
+                                <field name="name"/>
+                                <field name="sequence_id" groups="base.group_no_one"/>
+                                <field name="sequence_code"/>
+                            </group>
+                            <field name="notes" placeholder="Notes ..."/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="view_transaction_type_list" model="ir.ui.view">
+            <field name="name">transaction.type.list</field>
+            <field name="model">transaction.type</field>
+            <field name="arch" type="xml">
+                <tree string="Transaction Types">
+                    <field name="name"/>
+                    <field name="sequence"/>
+                    <field name="notes"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_transaction_type_list" model="ir.actions.act_window">
+            <field name="name">Transaction Types</field>
+            <field name="res_model">transaction.type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Transaction
+                </p>
+                <p>
+                    Transactions allow you to Create New archive type.
+                </p>
+            </field>
+        </record>
+
+        <!--        <record id="transaction_type_action_tree" model="ir.ui.view">-->
+        <!--            <field name="name">Transaction Types></field>-->
+        <!--            <field name="model">transaction.type</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <tree string="" editable="top">-->
+        <!--                    <field name="name"/>-->
+        <!--                    <field name="note"/>-->
+        <!--                    <field name="active"/>-->
+        <!--                </tree>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <record id="signature_tree" model="ir.ui.view">
+            <field name="name">Signature Keys></field>
+            <field name="model">management.signature.key</field>
+            <field name="arch" type="xml">
+                <tree string="" editable="top">
+                    <field name="name"/>
+                    <field name="note"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record id="transaction_type_action" model="ir.actions.act_window">
+            <field name="name">Transaction Types</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">transaction.type</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record id="signature_action" model="ir.actions.act_window">
+            <field name="name">Signatures</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">management.signature.key</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record id="archive_transactions_action" model="ir.actions.act_window">
+            <field name="name">Archiving Overview</field>
+            <field name="res_model">transaction.type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Archive type
+                </p>
+                <p>
+                    The Archive type system allows you to create various archive type.
+                </p>
+            </field>
+        </record>
+
+        <!-- transaction Type Kanban view-->
+        <record id="transaction_type_kanban" model="ir.ui.view">
+            <field name="name">transaction.type.kanban</field>
+            <field name="model">transaction.type</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_stock_kanban" create="0">
+                    <field name="name"/>
+                    <field name="color"/>
+                    <!--                    <field name="code" readonly="1"/>-->
+                    <templates>
+                        <t t-name="kanban-box">
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Top menu item -->
+        <menuitem name="Management Archive" id="management_archive"
+                  web_icon="management_archive,static/description/archive_icon.png"/>
+
+        <!-- menu categories -->
+
+        <menuitem name="DashBoard" id="menu_dashboard" parent="management_archive" sequence="10"/>
+        <menuitem name="Reporting" id="menu_reporting" parent="management_archive" sequence="11"/>
+        <menuitem name="Configuration" id="menu_configuration" parent="management_archive" sequence="12"/>
+
+        <!-- actions -->
+        <menuitem id="menu_transaction_type" name="ِTransactions" parent="menu_configuration"
+                  action="action_transaction_type_list" sequence="1"/>
+
+        <menuitem id="menu_signature_key" name="Signatures" parent="menu_configuration"
+                  action="signature_action" sequence="1"/>
+
+        <menuitem id="menu_archive_transactions" parent="menu_dashboard" sequence="1"
+                  action="archive_transactions_action"/>
+
+    </data>
+</odoo>
