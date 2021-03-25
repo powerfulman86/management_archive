@@ -16,7 +16,6 @@
             <field name="name">Administrator</field>
             <field name="category_id" ref="managemengt_archive.module_category_management_archive"/>
             <field name="implied_ids" eval="[(4, ref('archive_user'))]"/>
-            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         </record>
 
     </data>

@@ -131,7 +131,7 @@
                                 <field name="partner_id"/>
                                 <field name="issue_date"/>
                                 <!--                                <field name="name"/>-->
-                                <!--                                <field name="transaction_type"/>-->
+                                <field name="transaction_type" invisible="0"/>
                                 <field name="transaction_id"/>
                                 <field name="signature_key"/>
                                 <field name="signature_date"/>

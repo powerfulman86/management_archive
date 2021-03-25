@@ -27,4 +27,7 @@ class TransactionType(models.Model):
     def action_view_archive_ids(self):
         action = self.env.ref('managemengt_archive.archive_management_action').read()[0]
         action['domain'] = [('id', 'in', self.archive_ids.ids)]
+        action['context'] = {
+            'default_transaction_type': self.id,
+        }
         return action
