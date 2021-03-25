@@ -129,9 +129,10 @@
                         <group>
                             <group>
                                 <field name="partner_id"/>
-                                <field name="issue_date"/>
                                 <!--                                <field name="name"/>-->
-                                <field name="transaction_type" invisible="0"/>
+                                <field name="form_kanban" invisible="1"/>
+                                <field name="transaction_type" attrs="{'invisible':[('form_kanban', '=', True)]}"/>
+                                <field name="issue_date"/>
                                 <field name="transaction_id"/>
                                 <field name="signature_key"/>
                                 <field name="signature_date"/>

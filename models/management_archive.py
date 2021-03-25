@@ -27,6 +27,7 @@ class ManagementArchive(models.Model):
     doc_attachment_id = fields.Many2many('ir.attachment', 'doc_attach_rel2', 'doc_id', 'attach_id3',
                                          string="Attachment",
                                          help='You can attach the copy of your document', copy=False, attachment=True)
+    form_kanban = fields.Boolean("")
     _sql_constraints = [
         (
             "transaction_id_unique",

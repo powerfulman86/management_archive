@@ -29,5 +29,6 @@ class TransactionType(models.Model):
         action['domain'] = [('id', 'in', self.archive_ids.ids)]
         action['context'] = {
             'default_transaction_type': self.id,
+            'default_form_kanban': True,
         }
         return action
