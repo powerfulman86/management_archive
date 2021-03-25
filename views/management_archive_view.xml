@@ -1,7 +1,226 @@
 <odoo>
     <data>
 
+        <!-- explicit list view definition -->
+        <record id="view_transaction_type_form" model="ir.ui.view">
+            <field name="name">transaction.type.form</field>
+            <field name="model">transaction.type</field>
+            <field name="arch" type="xml">
+                <form string="Transaction Types">
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <group row="2">
+                            <group>
+                                <field name="active" invisible="1"/>
+                                <field name="name"/>
+                                <field name="sequence_id" groups="base.group_no_one"/>
+                                <field name="sequence_code"/>
+                            </group>
+                            <field name="notes" placeholder="Notes ..."/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
 
+        <record id="view_transaction_type_list" model="ir.ui.view">
+            <field name="name">transaction.type.list</field>
+            <field name="model">transaction.type</field>
+            <field name="arch" type="xml">
+                <tree string="Transaction Types">
+                    <field name="name"/>
+                    <field name="sequence"/>
+                    <field name="notes"/>
+                </tree>
+            </field>
+        </record>
 
+        <record id="action_transaction_type_list" model="ir.actions.act_window">
+            <field name="name">Transaction Types</field>
+            <field name="res_model">transaction.type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Transaction
+                </p>
+                <p>
+                    Transactions allow you to Create New archive type.
+                </p>
+            </field>
+        </record>
+
+        <!--        <record id="transaction_type_action_tree" model="ir.ui.view">-->
+        <!--            <field name="name">Transaction Types></field>-->
+        <!--            <field name="model">transaction.type</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <tree string="" editable="top">-->
+        <!--                    <field name="name"/>-->
+        <!--                    <field name="note"/>-->
+        <!--                    <field name="active"/>-->
+        <!--                </tree>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <record id="signature_tree" model="ir.ui.view">
+            <field name="name">Signature Keys></field>
+            <field name="model">management.signature.key</field>
+            <field name="arch" type="xml">
+                <tree string="" editable="top">
+                    <field name="name"/>
+                    <field name="note"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record id="transaction_type_action" model="ir.actions.act_window">
+            <field name="name">Transaction Types</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">transaction.type</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record id="signature_action" model="ir.actions.act_window">
+            <field name="name">Signatures</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">management.signature.key</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record id="archive_transactions_action" model="ir.actions.act_window">
+            <field name="name">Archiving Overview</field>
+            <field name="res_model">transaction.type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Archive type
+                </p>
+                <p>
+                    The Archive type system allows you to create various archive type.
+                </p>
+            </field>
+        </record>
+
+        <record id="archive_view_form" model="ir.ui.view">
+            <field name="name">Archive Form View</field>
+            <field name="model">management.archive</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button class="oe_highlight" name="action_approve" states="draft" type="object"
+                                groups="managemengt_archive.archive_manager" string="Approve"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="issue_date"/>
+                                <!--                                <field name="name"/>-->
+                                <!--                                <field name="transaction_type"/>-->
+                                <field name="transaction_id"/>
+                                <field name="signature_key"/>
+                                <field name="signature_date"/>
+                                <field name="signature_desc"/>
+                            </group>
+                            <group>
+                                <field name="subject"/>
+                                <field name="doc_attachment_id" widget="many2many_binary" class="oe_inline"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="archive_view_tree" model="ir.ui.view">
+            <field name="name">Archiving Management Tree</field>
+            <field name="model">management.archive</field>
+            <field name="arch" type="xml">
+                <tree string="archive tree">
+                    <field name="name"/>
+                    <field name="transaction_type"/>
+                    <field name="partner_id"/>
+                    <field name="subject"/>
+                    <field name="signature_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="archive_management_action" model="ir.actions.act_window">
+            <field name="name">Transaction</field>
+            <field name="res_model">management.archive</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                   (0, 0, {'view_mode': 'tree', 'view_id': ref('archive_view_tree')}),
+                   (0, 0, {'view_mode': 'form', 'view_id': ref('archive_view_form')}),
+                   ]"/>
+
+        </record>
+
+        <record id="transaction_type_kanban" model="ir.ui.view">
+            <field name="name">transaction.type.kanban</field>
+            <field name="model">transaction.type</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_stock_kanban" create="0">
+                    <field name="name"/>
+                    <field name="color"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card">
+                                <span class="oe_kanban_color_help"
+                                      t-attf-title="In #{kanban_getcolorname(record.color.raw_value)}" role="img"
+                                      t-attf-aria-label="In #{kanban_getcolorname(record.color.raw_value)}"/>
+                                <div class="o_kanban_card_header">
+                                    <div class="o_primary o_kanban_record_title">
+                                        Name :
+                                        <field name="name"/>
+                                    </div>
+                                    <!--                                    <div class="o_secondary">-->
+                                    <!--                                        <field name="archive_count"/>-->
+                                    <!--                                    </div>-->
+
+                                </div>
+                                <div class="container o_kanban_card_content" t-if="!selection_mode">
+                                    <div class="row">
+                                        <div class="col-6 o_kanban_primary_left">
+                                            <button class="btn btn-primary" name="action_view_archive_ids"
+                                                    type="object">
+                                                <span>
+                                                    <field name="archive_count"/>
+                                                    Archive
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
     </data>
 </odoo>
