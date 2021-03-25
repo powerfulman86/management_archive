@@ -10,7 +10,7 @@
                         <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
                                 attrs="{'invisible': [('active', '=', True)]}"/>
                         <group row="2">
-                            <group >
+                            <group>
                                 <field name="active" invisible="1"/>
                                 <field name="name"/>
                                 <field name="sequence_id" groups="base.group_no_one"/>
@@ -108,7 +108,69 @@
             </field>
         </record>
 
-        <!-- transaction Type Kanban view-->
+        <record id="archive_view_form" model="ir.ui.view">
+            <field name="name">Archive Form View</field>
+            <field name="model">management.archive</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button class="oe_highlight" name="action_approve" states="draft" type="object"
+                                groups="managemengt_archive.archive_manager" string="Approve"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="issue_date"/>
+                                <!--                                <field name="name"/>-->
+                                <!--                                <field name="transaction_type"/>-->
+                                <field name="transaction_id"/>
+                                <field name="signature_key"/>
+                                <field name="signature_date"/>
+                                <field name="signature_desc"/>
+
+                            </group>
+                            <group>
+
+                                <field name="subject"/>
+                                <field name="doc_attachment_id" widget="many2many_binary" class="oe_inline"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="archive_view_tree" model="ir.ui.view">
+            <field name="name">Archiving Management Tree</field>
+            <field name="model">management.archive</field>
+            <field name="arch" type="xml">
+                <tree string="archive tree">
+                    <field name="name"/>
+                    <field name="transaction_type"/>
+                    <field name="partner_id"/>
+                    <field name="subject"/>
+                    <field name="signature_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="archive_management_action" model="ir.actions.act_window">
+            <field name="name">Transaction</field>
+            <field name="res_model">management.archive</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                   (0, 0, {'view_mode': 'tree', 'view_id': ref('archive_view_tree')}),
+                   (0, 0, {'view_mode': 'form', 'view_id': ref('archive_view_form')}),
+                   ]"/>
+
+        </record>
+
         <record id="transaction_type_kanban" model="ir.ui.view">
             <field name="name">transaction.type.kanban</field>
             <field name="model">transaction.type</field>
@@ -116,9 +178,33 @@
                 <kanban class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_stock_kanban" create="0">
                     <field name="name"/>
                     <field name="color"/>
-                    <!--                    <field name="code" readonly="1"/>-->
                     <templates>
                         <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card">
+                                <span class="oe_kanban_color_help"
+                                      t-attf-title="In #{kanban_getcolorname(record.color.raw_value)}" role="img"
+                                      t-attf-aria-label="In #{kanban_getcolorname(record.color.raw_value)}"/>
+                                <div class="o_kanban_card_header">
+                                    <div class="o_primary o_kanban_record_title">
+                                        Name : <field name="name"/>
+                                    </div>
+                                    <!--                                    <div class="o_secondary">-->
+                                    <!--                                        <field name="archive_count"/>-->
+                                    <!--                                    </div>-->
+
+                                </div>
+                                <div class="container o_kanban_card_content" t-if="!selection_mode">
+                                    <div class="row">
+                                        <div class="col-6 o_kanban_primary_left">
+                                            <button class="btn btn-primary" name="action_view_archive_ids"
+                                                    type="object">
+                                                <span><field name="archive_count"/> Archive</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </t>
                     </templates>
                 </kanban>
@@ -126,17 +212,20 @@
         </record>
 
         <!-- Top menu item -->
-        <menuitem name="Management Archive" id="management_archive"
-                  web_icon="management_archive,static/description/archive_icon.png"/>
+        <menuitem name="Management Archive" id="management_archive" groups="managemengt_archive.archive_user"
+                  web_icon="managemengt_archive,static/description/icon.png"/>
 
         <!-- menu categories -->
 
-        <menuitem name="DashBoard" id="menu_dashboard" parent="management_archive" sequence="10"/>
+        <menuitem name="DashBoard" id="menu_dashboard"  parent="management_archive" sequence="1"/>
+        <menuitem id="menu_archive_management_transactions" parent="management_archive" sequence="2"
+                  action="archive_management_action"/>
         <menuitem name="Reporting" id="menu_reporting" parent="management_archive" sequence="11"/>
-        <menuitem name="Configuration" id="menu_configuration" parent="management_archive" sequence="12"/>
+        <menuitem name="Configuration" id="menu_configuration" parent="management_archive"
+                  groups="managemengt_archive.archive_manager" sequence="12"/>
 
         <!-- actions -->
-        <menuitem id="menu_transaction_type" name="ِTransactions" parent="menu_configuration"
+        <menuitem id="menu_transaction_type" name="ِTransactions Type" parent="menu_configuration"
                   action="action_transaction_type_list" sequence="1"/>
 
         <menuitem id="menu_signature_key" name="Signatures" parent="menu_configuration"

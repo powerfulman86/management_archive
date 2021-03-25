@@ -1,4 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_management_archive,management_archive,model_management_archive,,1,1,1,1
+access_management_archive_user,management_archive,model_management_archive,managemengt_archive.archive_user,1,1,0,0
+access_management_archive_manager,management_archive,model_management_archive,managemengt_archive.archive_manager,1,1,1,1
 access_management_signature_key,management_signature_key,model_management_signature_key,,1,1,1,1
 access_transaction_type,transaction_type,model_transaction_type,,1,1,1,1

@@ -19,11 +19,14 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','portal'],
+    'depends': ['base', 'portal', 'contacts'],
 
     # always loaded
+    'images': ['static/description/icon.png'],
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
+        'data/sequence.xml',
         'views/menu.xml',
     ],
     # only loaded in demonstration mode
