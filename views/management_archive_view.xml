@@ -122,27 +122,42 @@
                     </header>
                     <sheet>
                         <div class="oe_title">
+                            <h3><field name="name" readonly="1"/></h3>
+                            <label for="subject" class="oe_edit_only"/>
                             <h1>
-                                <field name="name" readonly="1"/>
+                                <field name="subject" placeholder="subject ..."/>
                             </h1>
                         </div>
-                        <group>
+
+                        <!--                        <div class="oe_title">-->
+                        <!--                            <h1>-->
+                        <!--                                <field name="name" readonly="1"/>-->
+                        <!--                            </h1>-->
+                        <!--                        </div>-->
+                        <group row="2">
                             <group>
+                                <field name="transaction_id"/>
                                 <field name="partner_id"/>
-                                <!--                                <field name="name"/>-->
                                 <field name="form_kanban" invisible="1"/>
                                 <field name="transaction_type" attrs="{'invisible':[('form_kanban', '=', True)]}"/>
-                                <field name="issue_date"/>
-                                <field name="transaction_id"/>
                                 <field name="signature_key"/>
-                                <field name="signature_date"/>
+
                                 <field name="signature_desc"/>
                             </group>
                             <group>
-                                <field name="subject"/>
-                                <field name="doc_attachment_id" widget="many2many_binary" class="oe_inline"/>
+                                <field name="priority" widget="priority"/>
+                                <field name="issue_date"/>
+                                <field name="signature_date"/>
                             </group>
                         </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="default_description"/>
+                            </page>
+                            <page string="Attachment">
+                                <field name="doc_attachment_id" widget="many2many_binary" class="oe_inline"/>
+                            </page>
+                        </notebook>
                     </sheet>
                     <div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers"/>
@@ -196,7 +211,6 @@
                                       t-attf-aria-label="In #{kanban_getcolorname(record.color.raw_value)}"/>
                                 <div class="o_kanban_card_header">
                                     <div class="o_primary o_kanban_record_title">
-                                        Name :
                                         <field name="name"/>
                                     </div>
                                     <!--                                    <div class="o_secondary">-->

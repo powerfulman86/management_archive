@@ -3,6 +3,13 @@
 from odoo import api, fields, models, _
 from datetime import datetime
 
+AVAILABLE_PRIORITIES = [
+    ('0', 'Low'),
+    ('1', 'Medium'),
+    ('2', 'High'),
+    ('3', 'Very High'),
+]
+
 
 class ManagementArchive(models.Model):
     _name = 'management.archive'
@@ -14,19 +21,22 @@ class ManagementArchive(models.Model):
     transaction_id = fields.Char('Transaction Id', index=True)
     transaction_type = fields.Many2one(comodel_name="transaction.type", string="Transaction Type", required=True, )
     state = fields.Selection(
-        string='state', selection=[
+        string='state',tracking=True, selection=[
             ('draft', 'Draft'), ('done', 'Locked'), ], default='draft', required=True, )
 
     partner_id = fields.Many2one('res.partner', string='Customer', readonly=True,
                                  states={'draft': [('readonly', False)], 'done': [('readonly', True)]},
                                  required=True, index=True, tracking=1, )
     subject = fields.Text('Subject')
-    signature_key = fields.Many2one('management.signature.key', invisible=1, copy=False, required=True)
+    default_description = fields.Html('Description', help='Description')
+    signature_key = fields.Many2one('management.signature.key', invisible=1, copy=False)
     signature_desc = fields.Text('Note')
-    signature_date = fields.Date(string="Signature Date", default=fields.Date.context_today, copy=False)
+    signature_date = fields.Date(string="Signature Date",tracking=True, default=fields.Date.context_today, copy=False)
     doc_attachment_id = fields.Many2many('ir.attachment', 'doc_attach_rel2', 'doc_id', 'attach_id3',
                                          string="Attachment",
                                          help='You can attach the copy of your document', copy=False, attachment=True)
+    priority = fields.Selection(AVAILABLE_PRIORITIES, string='Priority', index=True,
+                                default=AVAILABLE_PRIORITIES[0][0])
     form_kanban = fields.Boolean("")
     _sql_constraints = [
         (
@@ -37,7 +47,7 @@ class ManagementArchive(models.Model):
     ]
 
     def action_approve(self):
-        self.state = 'approve'
+        self.state = 'done'
 
     @api.model
     def create(self, values):
