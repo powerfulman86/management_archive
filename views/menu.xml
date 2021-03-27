@@ -10,10 +10,6 @@
         <menuitem id="menu_archive_transactions" parent="menu_dashboard" sequence="1"
                   action="archive_transactions_action"/>
 
-        <!-- Top menu item -->
-        <menuitem name="Management Archive" id="management_archive" groups="management_archive.archive_user"
-                  web_icon="management_archive,static/description/icon.png"/>
-
         <!-- menu categories -->
 
         <menuitem name="DashBoard" id="menu_dashboard"  parent="management_archive" sequence="1"/>
@@ -22,6 +18,10 @@
         <menuitem name="Reporting" id="menu_reporting" parent="management_archive" sequence="11"/>
         <menuitem name="Configuration" id="menu_configuration" parent="management_archive"
                   groups="management_archive.archive_manager" sequence="12"/>
+
+         <!-- Top menu item -->
+        <menuitem name="Management Archive" id="management_archive" groups="management_archive.archive_user"
+                  web_icon="management_archive,static/description/icon.png"/>
 
     </data>
 </odoo>
