@@ -16,7 +16,7 @@ class TransactionType(models.Model):
     archive_ids = fields.One2many(comodel_name='management.archive', inverse_name='transaction_type')
     sequence = fields.Integer('Sequence', help="Used to order the 'All Operations' kanban view")
     sequence_id = fields.Many2one('ir.sequence', 'Reference Sequence', copy=False)
-    sequence_code = fields.Char('Code', required=True)
+    sequence_code = fields.Char('Code', required=True , size=4)
     archive_count = fields.Integer(compute="count_archive")
 
     @api.depends('archive_ids')
@@ -25,7 +25,7 @@ class TransactionType(models.Model):
             rec.archive_count = len(rec.archive_ids.ids)
 
     def action_view_archive_ids(self):
-        action = self.env.ref('managemengt_archive.archive_management_action').read()[0]
+        action = self.env.ref('management_archive.archive_management_action').read()[0]
         action['domain'] = [('id', 'in', self.archive_ids.ids)]
         action['context'] = {
             'default_transaction_type': self.id,

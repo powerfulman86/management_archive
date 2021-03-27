@@ -9,15 +9,13 @@
         <record id="archive_user" model="res.groups">
             <field name="name">User</field>
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-            <field name="category_id" ref="managemengt_archive.module_category_management_archive"/>
+            <field name="category_id" ref="management_archive.module_category_management_archive"/>
         </record>
 
         <record id="archive_manager" model="res.groups">
             <field name="name">Administrator</field>
-            <field name="category_id" ref="managemengt_archive.module_category_management_archive"/>
+            <field name="category_id" ref="management_archive.module_category_management_archive"/>
             <field name="implied_ids" eval="[(4, ref('archive_user'))]"/>
         </record>
-
     </data>
-
 </odoo>

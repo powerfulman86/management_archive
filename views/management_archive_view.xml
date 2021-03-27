@@ -117,7 +117,7 @@
                 <form string="">
                     <header>
                         <button class="oe_highlight" name="action_approve" states="draft" type="object"
-                                groups="managemengt_archive.archive_manager" string="Approve"/>
+                                groups="management_archive.archive_manager" string="Approve"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
