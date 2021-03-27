@@ -10,6 +10,13 @@ AVAILABLE_PRIORITIES = [
     ('3', 'Very High'),
 ]
 
+AVAILABLE_STATUS = [
+    ('draft', 'Draft'),
+    ('approved', 'Approved'),
+    ('followup', 'Follow Up'),
+    ('closed', 'Closed'),
+]
+
 
 class ManagementArchive(models.Model):
     _name = 'management.archive'
@@ -21,7 +28,7 @@ class ManagementArchive(models.Model):
     transaction_id = fields.Char('Transaction Id', index=True)
     transaction_type = fields.Many2one(comodel_name="transaction.type", string="Transaction Type", required=True, )
     state = fields.Selection(
-        string='state',tracking=True, selection=[
+        string='state', tracking=True, selection=[
             ('draft', 'Draft'), ('done', 'Locked'), ], default='draft', required=True, )
 
     partner_id = fields.Many2one('res.partner', string='Customer', readonly=True,
@@ -31,7 +38,7 @@ class ManagementArchive(models.Model):
     default_description = fields.Html('Description', help='Description')
     signature_key = fields.Many2one('management.signature.key', invisible=1, copy=False)
     signature_desc = fields.Text('Note')
-    signature_date = fields.Date(string="Signature Date",tracking=True, default=fields.Date.context_today, copy=False)
+    signature_date = fields.Date(string="Signature Date", tracking=True, default=fields.Date.context_today, copy=False)
     doc_attachment_id = fields.Many2many('ir.attachment', 'doc_attach_rel2', 'doc_id', 'attach_id3',
                                          string="Attachment",
                                          help='You can attach the copy of your document', copy=False, attachment=True)
@@ -55,7 +62,7 @@ class ManagementArchive(models.Model):
         seq = self.env['ir.sequence'].next_by_code('management.archive') or '/'
         currentYear = datetime.now().year
         print(currentYear)
-        print(res['transaction_type'] )
+        print(res['transaction_type'])
         name = str(res['transaction_type'].sequence_code) + "/" + str(currentYear) + "/" + str(seq)
         print(name)
         res['name'] = name

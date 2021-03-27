@@ -27,8 +27,8 @@
         'security/security.xml',
         'security/ir.model.access.csv',
         'data/sequence.xml',
-        'views/menu.xml',
         'views/management_archive_view.xml',
+        'views/menu.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -7,13 +7,16 @@
         <!-- menu categories -->
 
         <menuitem name="DashBoard" id="menu_dashboard"  parent="management_archive" sequence="1"/>
-        <menuitem id="menu_archive_management_transactions" parent="management_archive" sequence="2"
-                  action="archive_management_action"/>
+
         <menuitem name="Reporting" id="menu_reporting" parent="management_archive" sequence="11"/>
         <menuitem name="Configuration" id="menu_configuration" parent="management_archive"
                   groups="management_archive.archive_manager" sequence="12"/>
 
-         <!-- actions -->
+        <!-- actions -->
+
+        <menuitem id="menu_archive_management_transactions" parent="management_archive" sequence="2"
+                  action="archive_management_action"/>
+
         <menuitem id="menu_transaction_type" name="Transactions Type" parent="menu_configuration"
                   action="action_transaction_type_list" sequence="1"/>
 
