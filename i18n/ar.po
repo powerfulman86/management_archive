@@ -1,0 +1,9 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* archive management
+
+#. module: management.archive
+#: code:addons/account/models/account.py:0
+#, python-format
+msgid "%s (Copy)"
+msgstr "%s (نسخة)"
