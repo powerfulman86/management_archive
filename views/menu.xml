@@ -1,14 +1,8 @@
 <odoo>
     <data>
-         <!-- actions -->
-        <menuitem id="menu_transaction_type" name="Transactions Type" parent="menu_configuration"
-                  action="action_transaction_type_list" sequence="1"/>
-
-        <menuitem id="menu_signature_key" name="Signatures" parent="menu_configuration"
-                  action="signature_action" sequence="1"/>
-
-        <menuitem id="menu_archive_transactions" parent="menu_dashboard" sequence="1"
-                  action="archive_transactions_action"/>
+         <!-- Top menu item -->
+        <menuitem name="Management Archive" id="management_archive" groups="management_archive.archive_user"
+                  web_icon="management_archive,static/description/icon.png"/>
 
         <!-- menu categories -->
 
@@ -19,9 +13,15 @@
         <menuitem name="Configuration" id="menu_configuration" parent="management_archive"
                   groups="management_archive.archive_manager" sequence="12"/>
 
-         <!-- Top menu item -->
-        <menuitem name="Management Archive" id="management_archive" groups="management_archive.archive_user"
-                  web_icon="management_archive,static/description/icon.png"/>
+         <!-- actions -->
+        <menuitem id="menu_transaction_type" name="Transactions Type" parent="menu_configuration"
+                  action="action_transaction_type_list" sequence="1"/>
+
+        <menuitem id="menu_signature_key" name="Signatures" parent="menu_configuration"
+                  action="signature_action" sequence="1"/>
+
+        <menuitem id="menu_archive_transactions" parent="menu_dashboard" sequence="1"
+                  action="archive_transactions_action"/>
 
     </data>
 </odoo>
