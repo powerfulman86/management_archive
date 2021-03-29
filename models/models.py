@@ -10,5 +10,5 @@ class SignatureKey(models.Model):
     name = fields.Char('Name')
     note = fields.Text('Note')
     active = fields.Boolean('Active', default=True,
-                            help="Set active to false to hide the Medical Plan without removing it.")
+                            help="Set active to false to hide the signature key Plan without removing it.")
 

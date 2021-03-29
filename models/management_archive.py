@@ -25,7 +25,7 @@ class ManagementArchive(models.Model):
 
     issue_date = fields.Date(string='Issue Date', default=fields.Date.context_today, copy=False)
     name = fields.Char(string='Document Number', required=False, copy=False)
-    transaction_id = fields.Char('Transaction Id', index=True)
+    transaction_id = fields.Char('Transaction Id', index=True, size=10)
     transaction_type = fields.Many2one(comodel_name="transaction.type", string="Transaction Type", required=True, )
     state = fields.Selection(
         string='state', tracking=True, selection=[

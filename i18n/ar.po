@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-27 18:55+0000\n"
-"PO-Revision-Date: 2021-03-27 18:55+0000\n"
+"POT-Creation-Date: 2021-03-29 09:01+0000\n"
+"PO-Revision-Date: 2021-03-29 09:01+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -92,7 +92,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:management_archive.archive_transactions_action
 #: model:ir.ui.menu,name:management_archive.menu_archive_transactions
 msgid "Archiving Overview"
-msgstr ""
+msgstr "نظرة عامة"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__doc_attachment_id
@@ -109,7 +109,7 @@ msgstr "عدد المرفقات"
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__campaign_id
 msgid "Campaign"
-msgstr ""
+msgstr "حملة اعلانية"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__sequence_code
@@ -183,7 +183,7 @@ msgstr ""
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__name
 msgid "Document Number"
-msgstr ""
+msgstr "رقم المستند"
 
 #. module: management_archive
 #: model:ir.model.fields.selection,name:management_archive.selection__management_archive__state__draft
@@ -194,13 +194,13 @@ msgstr "مسودة"
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__message_follower_ids
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "المتابعين"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__message_channel_ids
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__message_channel_ids
 msgid "Followers (Channels)"
-msgstr ""
+msgstr "قنوات المتابعين"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__message_partner_ids
@@ -214,14 +214,19 @@ msgid "Form Kanban"
 msgstr ""
 
 #. module: management_archive
+#: model_terms:ir.ui.view,arch_db:management_archive.view_management_archive_search
+msgid "Group By"
+msgstr "تجميع على مستوى"
+
+#. module: management_archive
 #: model:ir.module.category,description:management_archive.module_category_management_archive
 msgid "Helps you manage Archive."
-msgstr ""
+msgstr "يساعدك على معالجة الارشيف"
 
 #. module: management_archive
 #: model:ir.model.fields.selection,name:management_archive.selection__management_archive__priority__2
 msgid "High"
-msgstr ""
+msgstr "اهميه قصوى"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__id
@@ -234,7 +239,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__activity_exception_icon
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "ايقونه"
 
 #. module: management_archive
 #: model:ir.model.fields,help:management_archive.field_management_archive__activity_exception_icon
@@ -293,23 +298,23 @@ msgstr "اخر من قام بالتعديل"
 #: model:ir.model.fields,field_description:management_archive.field_management_signature_key__write_date
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "اخر تحديث في"
 
 #. module: management_archive
 #: model:ir.model.fields.selection,name:management_archive.selection__management_archive__state__done
 msgid "Locked"
-msgstr ""
+msgstr "مغلق"
 
 #. module: management_archive
 #: model:ir.model.fields.selection,name:management_archive.selection__management_archive__priority__0
 msgid "Low"
-msgstr ""
+msgstr "قليل الاهميه"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__message_main_attachment_id
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
+msgstr "مرفق رئيسي"
 
 #. module: management_archive
 #: model:ir.model,name:management_archive.model_management_archive
@@ -326,7 +331,7 @@ msgstr "التوقيعات"
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__medium_id
 #: model:ir.model.fields.selection,name:management_archive.selection__management_archive__priority__1
 msgid "Medium"
-msgstr ""
+msgstr "متوسط الاهميه"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__message_has_error
@@ -338,7 +343,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__message_ids
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "المراسلات"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_signature_key__name
@@ -424,7 +429,7 @@ msgstr "الاهمية"
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__sequence_id
 msgid "Reference Sequence"
-msgstr ""
+msgstr "رقم المسلسل"
 
 #. module: management_archive
 #: model:ir.ui.menu,name:management_archive.menu_reporting
@@ -444,6 +449,11 @@ msgid "SMS Delivery error"
 msgstr ""
 
 #. module: management_archive
+#: model_terms:ir.ui.view,arch_db:management_archive.view_management_archive_search
+msgid "Search Archives"
+msgstr "البحث عن الارشيف"
+
+#. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__access_token
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__access_token
 msgid "Security Token"
@@ -452,13 +462,13 @@ msgstr ""
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "المسلسل"
 
 #. module: management_archive
 #: model:ir.model.fields,help:management_archive.field_management_signature_key__active
 #: model:ir.model.fields,help:management_archive.field_transaction_type__active
-msgid "Set active to false to hide the Medical Plan without removing it."
-msgstr ""
+msgid "Set active to false to hide the signature key Plan without removing it."
+msgstr "الغاء تفعيل التوقيع"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__signature_date
@@ -552,7 +562,7 @@ msgstr "انواع الحركات"
 #. module: management_archive
 #: model_terms:ir.actions.act_window,help:management_archive.action_transaction_type_list
 msgid "Transactions allow you to Create New archive type."
-msgstr ""
+msgstr "شاشة انواع الحركات تساعدك في اضافة انواع جديدة من الارشفه"
 
 #. module: management_archive
 #: model:ir.model.fields,help:management_archive.field_management_archive__activity_exception_decoration
@@ -585,7 +595,7 @@ msgstr "مستخدم"
 #. module: management_archive
 #: model:ir.model.fields.selection,name:management_archive.selection__management_archive__priority__3
 msgid "Very High"
-msgstr ""
+msgstr "اهميه قصوى"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__website_message_ids
@@ -602,15 +612,36 @@ msgstr ""
 #. module: management_archive
 #: model:ir.model.fields,help:management_archive.field_management_archive__doc_attachment_id
 msgid "You can attach the copy of your document"
-msgstr ""
+msgstr "يمكنك اضافة نسخة من المرفقات"
 
 #. module: management_archive
 #: model_terms:ir.ui.view,arch_db:management_archive.archive_view_tree
 msgid "archive tree"
-msgstr ""
+msgstr "شجرة الارشيف"
+
+#. module: management_archive
+#: model_terms:ir.ui.view,arch_db:management_archive.view_management_archive_search
+msgid "issue_date"
+msgstr "تاريخ الاصدار"
+
+#. module: management_archive
+#: model_terms:ir.ui.view,arch_db:management_archive.view_management_archive_search
+msgid "name"
+msgstr "كود الحركة"
+
+#. module: management_archive
+#: model_terms:ir.ui.view,arch_db:management_archive.view_management_archive_search
+msgid "partner_id"
+msgstr "الجهة"
+
+#. module: management_archive
+#: model_terms:ir.ui.view,arch_db:management_archive.view_management_archive_search
+msgid "signature_key"
+msgstr "التوقيع"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__state
+#: model_terms:ir.ui.view,arch_db:management_archive.view_management_archive_search
 msgid "state"
 msgstr "الحالة"
 
@@ -618,3 +649,8 @@ msgstr "الحالة"
 #: model_terms:ir.ui.view,arch_db:management_archive.archive_view_form
 msgid "subject ..."
 msgstr "الموضوع ..."
+
+#. module: management_archive
+#: model_terms:ir.ui.view,arch_db:management_archive.view_management_archive_search
+msgid "transaction_type"
+msgstr "نوع الحركة"

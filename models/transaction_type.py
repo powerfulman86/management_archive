@@ -16,7 +16,7 @@ class TransactionType(models.Model):
     archive_ids = fields.One2many(comodel_name='management.archive', inverse_name='transaction_type')
     sequence = fields.Integer('Sequence', help="Used to order the 'All Operations' kanban view")
     sequence_id = fields.Many2one('ir.sequence', 'Reference Sequence', copy=False)
-    sequence_code = fields.Char('Code', required=True , size=4)
+    sequence_code = fields.Char('Code', required=True, size=4)
     archive_count = fields.Integer(compute="count_archive")
 
     @api.depends('archive_ids')

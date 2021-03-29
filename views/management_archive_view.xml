@@ -1,5 +1,31 @@
 <odoo>
     <data>
+        <record id="view_management_archive_search" model="ir.ui.view">
+            <field name="name">management.archive.select</field>
+            <field name="model">management.archive</field>
+            <field name="arch" type="xml">
+                <search string="Search Archives">
+                    <field name="issue_date"/>
+                    <field name="name"/>
+                    <field name="transaction_id"/>
+                    <field name="transaction_type"/>
+                    <field name="state"/>
+                    <field name="partner_id"/>
+                    <field name="signature_key"/>
+                    <group expand="0" string="Group By">
+                        <filter string="issue_date" name="group_by_Issue_Date" context="{'group_by':'issue_date'}"/>
+                        <filter string="name" name="group_by_Document_Number" context="{'group_by':'name'}"/>
+                        <filter string="transaction_type" name="group_by_Transaction_Type"
+                                context="{'group_by':'transaction_type'}"/>
+                        <filter string="state" name="group_by_state" context="{'group_by':'state'}"/>
+                        <filter string="partner_id" name="group_by_Customer" context="{'group_by':'partner_id'}"/>
+                        <filter string="signature_key" name="group_by_signature_key"
+                                context="{'group_by':'signature_key'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
 
         <!-- explicit list view definition -->
         <record id="view_transaction_type_form" model="ir.ui.view">
@@ -122,10 +148,13 @@
                     </header>
                     <sheet>
                         <div class="oe_title">
-                            <h3><field name="name" readonly="1"/></h3>
+                            <h3>
+                                <field name="name" readonly="1"/>
+                            </h3>
                             <label for="subject" class="oe_edit_only"/>
                             <h1>
-                                <field name="subject" placeholder="subject ..." attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="subject" placeholder="subject ..."
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </h1>
                         </div>
 
@@ -145,7 +174,8 @@
                                 <field name="signature_desc" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </group>
                             <group>
-                                <field name="priority" widget="priority" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="priority" widget="priority"
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="issue_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="signature_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </group>
