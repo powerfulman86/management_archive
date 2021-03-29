@@ -125,7 +125,7 @@
                             <h3><field name="name" readonly="1"/></h3>
                             <label for="subject" class="oe_edit_only"/>
                             <h1>
-                                <field name="subject" placeholder="subject ..."/>
+                                <field name="subject" placeholder="subject ..." attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </h1>
                         </div>
 
@@ -136,18 +136,18 @@
                         <!--                        </div>-->
                         <group row="2">
                             <group>
-                                <field name="transaction_id"/>
+                                <field name="transaction_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="partner_id"/>
                                 <field name="form_kanban" invisible="1"/>
                                 <field name="transaction_type" attrs="{'invisible':[('form_kanban', '=', True)]}"/>
-                                <field name="signature_key"/>
+                                <field name="signature_key" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
 
-                                <field name="signature_desc"/>
+                                <field name="signature_desc" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </group>
                             <group>
-                                <field name="priority" widget="priority"/>
-                                <field name="issue_date"/>
-                                <field name="signature_date"/>
+                                <field name="priority" widget="priority" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="issue_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="signature_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </group>
                         </group>
                         <notebook>
