@@ -12,8 +12,9 @@ AVAILABLE_PRIORITIES = [
 
 AVAILABLE_STATUS = [
     ('draft', 'Draft'),
-    ('approved', 'Approved'),
+    ('done', 'Locked'),
     ('followup', 'Follow Up'),
+    ('reqresponse', 'Request Response'),
     ('closed', 'Closed'),
 ]
 
@@ -27,9 +28,8 @@ class ManagementArchive(models.Model):
     name = fields.Char(string='Document Number', required=False, copy=False)
     transaction_id = fields.Char('Transaction Id', index=True, size=10)
     transaction_type = fields.Many2one(comodel_name="transaction.type", string="Transaction Type", required=True, )
-    state = fields.Selection(
-        string='state', tracking=True, selection=[
-            ('draft', 'Draft'), ('done', 'Locked'), ], default='draft', required=True, )
+    state = fields.Selection(AVAILABLE_STATUS, string='state', tracking=True, default=AVAILABLE_STATUS[0][0],
+                             required=True)
 
     partner_id = fields.Many2one('res.partner', string='Customer', readonly=True,
                                  states={'draft': [('readonly', False)], 'done': [('readonly', True)]},
@@ -55,6 +55,16 @@ class ManagementArchive(models.Model):
 
     def action_approve(self):
         self.state = 'done'
+
+    def action_followup(self):
+        self.state = 'followup'
+
+    def action_request_response(self):
+        self.state = 'reqresponse'
+
+    def action_close(self):
+        self.state = 'closed'
+
 
     @api.model
     def create(self, values):

@@ -144,6 +144,12 @@
                     <header>
                         <button class="oe_highlight" name="action_approve" states="draft" type="object"
                                 groups="management_archive.archive_manager" string="Approve"/>
+                        <button class="oe_highlight" name="action_followup" states="followup" type="object"
+                                groups="management_archive.archive_manager" string="Follow-up"/>
+                        <button class="oe_highlight" name="action_request_response" states="reqresponse" type="object"
+                                groups="management_archive.archive_manager" string="Request Response"/>
+                        <button class="oe_highlight" name="action_close" states="closed" type="object"
+                                groups="management_archive.archive_manager" string="Close"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
