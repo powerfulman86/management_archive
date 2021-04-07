@@ -30,10 +30,6 @@
         'views/management_archive_view.xml',
         'views/menu.xml',
     ],
-    # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
     'images': ['static/description/archive_icon.png'],
     'license': 'AGPL-3',
     'installable': True,

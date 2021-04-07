@@ -26,8 +26,6 @@
             </field>
         </record>
 
-
-        <!-- explicit list view definition -->
         <record id="view_transaction_type_form" model="ir.ui.view">
             <field name="name">transaction.type.form</field>
             <field name="model">transaction.type</field>
@@ -229,8 +227,69 @@
                    (0, 0, {'view_mode': 'tree', 'view_id': ref('archive_view_tree')}),
                    (0, 0, {'view_mode': 'form', 'view_id': ref('archive_view_form')}),
                    ]"/>
-
         </record>
+
+        <record id="action_picking_tree_draft" model="ir.actions.act_window">
+            <field name="name">Draft</field>
+            <field name="res_model">management.archive</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="domain">[('state','=','draft')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                   (0, 0, {'view_mode': 'tree', 'view_id': ref('archive_view_tree')}),
+                   (0, 0, {'view_mode': 'form', 'view_id': ref('archive_view_form')}),
+                   ]"/>
+        </record>
+        <record id="action_picking_tree_done" model="ir.actions.act_window">
+            <field name="name">Draft</field>
+            <field name="res_model">management.archive</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="domain">[('state','=','done')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                   (0, 0, {'view_mode': 'tree', 'view_id': ref('archive_view_tree')}),
+                   (0, 0, {'view_mode': 'form', 'view_id': ref('archive_view_form')}),
+                   ]"/>
+        </record>
+        <record id="action_picking_tree_followup" model="ir.actions.act_window">
+            <field name="name">Draft</field>
+            <field name="res_model">management.archive</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="domain">[('state','=','followup')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                   (0, 0, {'view_mode': 'tree', 'view_id': ref('archive_view_tree')}),
+                   (0, 0, {'view_mode': 'form', 'view_id': ref('archive_view_form')}),
+                   ]"/>
+        </record>
+        <record id="action_picking_tree_reqresponse" model="ir.actions.act_window">
+            <field name="name">Draft</field>
+            <field name="res_model">management.archive</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="domain">[('state','=','reqresponse')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                   (0, 0, {'view_mode': 'tree', 'view_id': ref('archive_view_tree')}),
+                   (0, 0, {'view_mode': 'form', 'view_id': ref('archive_view_form')}),
+                   ]"/>
+        </record>
+        <record id="action_picking_tree_close" model="ir.actions.act_window">
+            <field name="name">Draft</field>
+            <field name="res_model">management.archive</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="domain">[('state','=','close')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                   (0, 0, {'view_mode': 'tree', 'view_id': ref('archive_view_tree')}),
+                   (0, 0, {'view_mode': 'form', 'view_id': ref('archive_view_form')}),
+                   ]"/>
+        </record>
+
 
         <record id="transaction_type_kanban" model="ir.ui.view">
             <field name="name">transaction.type.kanban</field>
@@ -246,8 +305,15 @@
                                       t-attf-title="In #{kanban_getcolorname(record.color.raw_value)}" role="img"
                                       t-attf-aria-label="In #{kanban_getcolorname(record.color.raw_value)}"/>
                                 <div class="o_kanban_card_header">
-                                    <div class="o_primary o_kanban_record_title">
-                                        <field name="name"/>
+                                    <!--                                    <div class="o_primary o_kanban_record_title">-->
+                                    <!--                                        <field name="name"/>-->
+                                    <!--                                    </div>-->
+                                    <div class="o_primary" t-if="!selection_mode">
+                                        <a type="object" name="get_archive">
+                                            <h3>
+                                                <field name="name"/>
+                                            </h3>
+                                        </a>
                                     </div>
                                     <!--                                    <div class="o_secondary">-->
                                     <!--                                        <field name="archive_count"/>-->
@@ -256,7 +322,7 @@
                                 </div>
                                 <div class="container o_kanban_card_content" t-if="!selection_mode">
                                     <div class="row">
-                                        <div class="col-6 o_kanban_primary_left">
+                                        <div class="col-6 o_kanban_primary_right">
                                             <button class="btn btn-primary" name="action_view_archive_ids"
                                                     type="object">
                                                 <span>
@@ -264,6 +330,59 @@
                                                     Archive
                                                 </span>
                                             </button>
+
+                                        </div>
+                                        <div class="col-6 o_kanban_primary_left">
+                                            <div t-if="record.count_draft.raw_value &gt; 0" class="row">
+                                                <div class="col-9">
+                                                    <a name="get_action_picking_tree_draft" type="object">
+                                                        Draft
+                                                    </a>
+                                                </div>
+                                                <div class="col-3">
+                                                    <field name="count_draft"/>
+                                                </div>
+                                            </div>
+                                            <div t-if="record.count_done.raw_value &gt; 0" class="row">
+                                                <div class="col-9">
+                                                    <a name="get_action_picking_tree_done" type="object">
+                                                        Done
+                                                    </a>
+                                                </div>
+                                                <div class="col-3">
+                                                    <field name="count_done"/>
+                                                </div>
+                                            </div>
+                                            <div t-if="record.count_followup.raw_value &gt; 0" class="row">
+                                                <div class="col-9">
+                                                    <a name="get_action_picking_tree_followup" type="object">
+                                                        FollowUP
+                                                    </a>
+                                                </div>
+                                                <div class="col-3">
+                                                    <field name="count_followup"/>
+                                                </div>
+                                            </div>
+                                            <div t-if="record.count_reqresponse.raw_value &gt; 0" class="row">
+                                                <div class="col-9">
+                                                    <a name="get_action_picking_tree_reqresponse" type="object">
+                                                        Request Response
+                                                    </a>
+                                                </div>
+                                                <div class="col-3">
+                                                    <field name="count_reqresponse"/>
+                                                </div>
+                                            </div>
+                                            <div t-if="record.count_closed.raw_value &gt; 0" class="row">
+                                                <div class="col-9">
+                                                    <a name="get_action_picking_tree_close" type="object">
+                                                        Closed
+                                                    </a>
+                                                </div>
+                                                <div class="col-3">
+                                                    <field name="count_closed"/>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
