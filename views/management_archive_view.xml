@@ -142,11 +142,11 @@
                     <header>
                         <button class="oe_highlight" name="action_approve" states="draft" type="object"
                                 groups="management_archive.archive_manager" string="Approve"/>
-                        <button class="oe_highlight" name="action_followup" states="followup" type="object"
+                        <button class="oe_highlight" name="action_followup" states="done" type="object"
                                 groups="management_archive.archive_manager" string="Follow-up"/>
-                        <button class="oe_highlight" name="action_request_response" states="reqresponse" type="object"
+                        <button class="oe_highlight" name="action_request_response" states="done" type="object"
                                 groups="management_archive.archive_manager" string="Request Response"/>
-                        <button class="oe_highlight" name="action_close" states="closed" type="object"
+                        <button class="oe_highlight" name="action_close" states="done,followup,reqresponse" type="object"
                                 groups="management_archive.archive_manager" string="Close"/>
                         <field name="state" widget="statusbar"/>
                     </header>

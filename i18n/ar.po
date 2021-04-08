@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-29 09:01+0000\n"
-"PO-Revision-Date: 2021-03-29 09:01+0000\n"
+"POT-Creation-Date: 2021-04-08 06:58+0000\n"
+"PO-Revision-Date: 2021-04-08 06:58+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -31,13 +31,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:management_archive.field_management_signature_key__active
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__active
 msgid "Active"
-msgstr ""
+msgstr "فعال"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__activity_ids
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "الانشطة"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__activity_exception_decoration
@@ -54,7 +54,7 @@ msgstr ""
 #. module: management_archive
 #: model:res.groups,name:management_archive.archive_manager
 msgid "Administrator"
-msgstr ""
+msgstr "مدير النظام"
 
 #. module: management_archive
 #: model_terms:ir.ui.view,arch_db:management_archive.archive_view_form
@@ -66,7 +66,7 @@ msgstr "اعتماد"
 #: model:ir.module.category,name:management_archive.module_category_management_archive
 #: model_terms:ir.ui.view,arch_db:management_archive.transaction_type_kanban
 msgid "Archive"
-msgstr ""
+msgstr "ارشيف"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__archive_count
@@ -76,7 +76,7 @@ msgstr ""
 #. module: management_archive
 #: model:ir.model.constraint,message:management_archive.constraint_management_archive_transaction_id_unique
 msgid "Archive Transaction Id must be unique across the database!"
-msgstr "رقم الحركة يجب ان لا يتحرك على مستوى السيستم"
+msgstr "رقم الحركة يجب ان لا يتكرر على مستوى السيستم"
 
 #. module: management_archive
 #: model:ir.model,name:management_archive.model_transaction_type
@@ -86,7 +86,7 @@ msgstr "انواع الحركات"
 #. module: management_archive
 #: model_terms:ir.ui.view,arch_db:management_archive.view_transaction_type_form
 msgid "Archived"
-msgstr ""
+msgstr "غير مفعل"
 
 #. module: management_archive
 #: model:ir.actions.act_window,name:management_archive.archive_transactions_action
@@ -112,6 +112,17 @@ msgid "Campaign"
 msgstr "حملة اعلانية"
 
 #. module: management_archive
+#: model_terms:ir.ui.view,arch_db:management_archive.archive_view_form
+msgid "Close"
+msgstr "اغلاق"
+
+#. module: management_archive
+#: model:ir.model.fields.selection,name:management_archive.selection__management_archive__state__closed
+#: model_terms:ir.ui.view,arch_db:management_archive.transaction_type_kanban
+msgid "Closed"
+msgstr "مغلق"
+
+#. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__sequence_code
 msgid "Code"
 msgstr "كود الحركة"
@@ -125,6 +136,31 @@ msgstr "اللون"
 #: model:ir.ui.menu,name:management_archive.menu_configuration
 msgid "Configuration"
 msgstr "الاعدادات"
+
+#. module: management_archive
+#: model:ir.model.fields,field_description:management_archive.field_transaction_type__count_closed
+msgid "Count Closed"
+msgstr "المغلق"
+
+#. module: management_archive
+#: model:ir.model.fields,field_description:management_archive.field_transaction_type__count_done
+msgid "Count Done"
+msgstr "المنتهي"
+
+#. module: management_archive
+#: model:ir.model.fields,field_description:management_archive.field_transaction_type__count_draft
+msgid "Count Draft"
+msgstr "المسودات"
+
+#. module: management_archive
+#: model:ir.model.fields,field_description:management_archive.field_transaction_type__count_followup
+msgid "Count Followup"
+msgstr "المتابعات"
+
+#. module: management_archive
+#: model:ir.model.fields,field_description:management_archive.field_transaction_type__count_reqresponse
+msgid "Count Reqresponse"
+msgstr "المطلوب رد"
 
 #. module: management_archive
 #: model_terms:ir.actions.act_window,help:management_archive.archive_transactions_action
@@ -178,7 +214,7 @@ msgstr "الوصف"
 #: model:ir.model.fields,field_description:management_archive.field_management_signature_key__display_name
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "الوصف"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__name
@@ -186,9 +222,35 @@ msgid "Document Number"
 msgstr "رقم المستند"
 
 #. module: management_archive
+#: model_terms:ir.ui.view,arch_db:management_archive.transaction_type_kanban
+msgid "Done"
+msgstr "انتهى"
+
+#. module: management_archive
+#: model:ir.actions.act_window,name:management_archive.action_picking_tree_close
+#: model:ir.actions.act_window,name:management_archive.action_picking_tree_done
+#: model:ir.actions.act_window,name:management_archive.action_picking_tree_draft
+#: model:ir.actions.act_window,name:management_archive.action_picking_tree_followup
+#: model:ir.actions.act_window,name:management_archive.action_picking_tree_reqresponse
 #: model:ir.model.fields.selection,name:management_archive.selection__management_archive__state__draft
+#: model_terms:ir.ui.view,arch_db:management_archive.transaction_type_kanban
 msgid "Draft"
 msgstr "مسودة"
+
+#. module: management_archive
+#: model:ir.model.fields.selection,name:management_archive.selection__management_archive__state__followup
+msgid "Follow Up"
+msgstr "متابعه"
+
+#. module: management_archive
+#: model_terms:ir.ui.view,arch_db:management_archive.archive_view_form
+msgid "Follow-up"
+msgstr "متابعه"
+
+#. module: management_archive
+#: model_terms:ir.ui.view,arch_db:management_archive.transaction_type_kanban
+msgid "FollowUP"
+msgstr "متابعه"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__message_follower_ids
@@ -233,7 +295,7 @@ msgstr "اهميه قصوى"
 #: model:ir.model.fields,field_description:management_archive.field_management_signature_key__id
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__id
 msgid "ID"
-msgstr ""
+msgstr "الكود"
 
 #. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__activity_exception_icon
@@ -437,6 +499,13 @@ msgid "Reporting"
 msgstr "التقارير"
 
 #. module: management_archive
+#: model:ir.model.fields.selection,name:management_archive.selection__management_archive__state__reqresponse
+#: model_terms:ir.ui.view,arch_db:management_archive.archive_view_form
+#: model_terms:ir.ui.view,arch_db:management_archive.transaction_type_kanban
+msgid "Request Response"
+msgstr "مطلوب الرد"
+
+#. module: management_archive
 #: model:ir.model.fields,field_description:management_archive.field_management_archive__activity_user_id
 #: model:ir.model.fields,field_description:management_archive.field_transaction_type__activity_user_id
 msgid "Responsible User"
@@ -465,9 +534,14 @@ msgid "Sequence"
 msgstr "المسلسل"
 
 #. module: management_archive
-#: model:ir.model.fields,help:management_archive.field_management_signature_key__active
 #: model:ir.model.fields,help:management_archive.field_transaction_type__active
-msgid "Set active to false to hide the signature key Plan without removing it."
+msgid "Set active to false to hide the Medical Plan without removing it."
+msgstr ""
+
+#. module: management_archive
+#: model:ir.model.fields,help:management_archive.field_management_signature_key__active
+msgid ""
+"Set active to false to hide the signature key Plan without removing it."
 msgstr "الغاء تفعيل التوقيع"
 
 #. module: management_archive
