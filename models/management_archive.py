@@ -12,7 +12,7 @@ AVAILABLE_PRIORITIES = [
 
 AVAILABLE_STATUS = [
     ('draft', 'Draft'),
-    ('done', 'Locked'),
+    ('lock', 'Locked'),
     ('followup', 'Follow Up'),
     ('reqresponse', 'Request Response'),
     ('closed', 'Closed'),
@@ -32,7 +32,7 @@ class ManagementArchive(models.Model):
                              required=True)
 
     partner_id = fields.Many2one('res.partner', string='Customer', readonly=True,
-                                 states={'draft': [('readonly', False)], 'done': [('readonly', True)]},
+                                 states={'draft': [('readonly', False)], 'lock': [('readonly', True)]},
                                  required=True, index=True, tracking=1, )
     subject = fields.Text('Subject')
     default_description = fields.Html('Description', help='Description')
@@ -54,7 +54,7 @@ class ManagementArchive(models.Model):
     ]
 
     def action_approve(self):
-        self.state = 'done'
+        self.state = 'lock'
 
     def action_followup(self):
         self.state = 'followup'
@@ -64,7 +64,6 @@ class ManagementArchive(models.Model):
 
     def action_close(self):
         self.state = 'closed'
-
 
     @api.model
     def create(self, values):

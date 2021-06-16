@@ -12,6 +12,7 @@
                     <field name="state"/>
                     <field name="partner_id"/>
                     <field name="signature_key"/>
+                    <field name="subject"/>
                     <group expand="0" string="Group By">
                         <filter string="issue_date" name="group_by_Issue_Date" context="{'group_by':'issue_date'}"/>
                         <filter string="name" name="group_by_Document_Number" context="{'group_by':'name'}"/>
@@ -142,11 +143,12 @@
                     <header>
                         <button class="oe_highlight" name="action_approve" states="draft" type="object"
                                 groups="management_archive.archive_manager" string="Approve"/>
-                        <button class="oe_highlight" name="action_followup" states="done" type="object"
+                        <button class="oe_highlight" name="action_followup" states="lock" type="object"
                                 groups="management_archive.archive_manager" string="Follow-up"/>
-                        <button class="oe_highlight" name="action_request_response" states="done" type="object"
+                        <button class="oe_highlight" name="action_request_response" states="lock" type="object"
                                 groups="management_archive.archive_manager" string="Request Response"/>
-                        <button class="oe_highlight" name="action_close" states="done,followup,reqresponse" type="object"
+                        <button class="oe_highlight" name="action_close" states="lock,followup,reqresponse"
+                                type="object"
                                 groups="management_archive.archive_manager" string="Close"/>
                         <field name="state" widget="statusbar"/>
                     </header>
@@ -241,11 +243,11 @@
                    (0, 0, {'view_mode': 'form', 'view_id': ref('archive_view_form')}),
                    ]"/>
         </record>
-        <record id="action_picking_tree_done" model="ir.actions.act_window">
+        <record id="action_picking_tree_lock" model="ir.actions.act_window">
             <field name="name">Draft</field>
             <field name="res_model">management.archive</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="domain">[('state','=','done')]</field>
+            <field name="domain">[('state','=','lock')]</field>
             <field name="view_mode">tree,form</field>
             <field name="view_ids"
                    eval="[(5, 0, 0),
@@ -343,14 +345,14 @@
                                                     <field name="count_draft"/>
                                                 </div>
                                             </div>
-                                            <div t-if="record.count_done.raw_value &gt; 0" class="row">
+                                            <div t-if="record.count_lock.raw_value &gt; 0" class="row">
                                                 <div class="col-9">
-                                                    <a name="get_action_picking_tree_done" type="object">
+                                                    <a name="get_action_picking_tree_lock" type="object">
                                                         Done
                                                     </a>
                                                 </div>
                                                 <div class="col-3">
-                                                    <field name="count_done"/>
+                                                    <field name="count_lock"/>
                                                 </div>
                                             </div>
                                             <div t-if="record.count_followup.raw_value &gt; 0" class="row">
@@ -392,6 +394,5 @@
                 </kanban>
             </field>
         </record>
-
     </data>
 </odoo>
