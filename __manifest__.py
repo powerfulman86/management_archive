@@ -28,6 +28,7 @@
         'security/ir.model.access.csv',
         'data/sequence.xml',
         'views/management_archive_view.xml',
+        'views/transaction_type_view.xml',
         'views/menu.xml',
     ],
     'images': ['static/description/archive_icon.png'],

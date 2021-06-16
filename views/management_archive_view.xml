@@ -27,59 +27,7 @@
             </field>
         </record>
 
-        <record id="view_transaction_type_form" model="ir.ui.view">
-            <field name="name">transaction.type.form</field>
-            <field name="model">transaction.type</field>
-            <field name="arch" type="xml">
-                <form string="Transaction Types">
-                    <sheet>
-                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
-                                attrs="{'invisible': [('active', '=', True)]}"/>
-                        <group row="2">
-                            <group>
-                                <field name="active" invisible="1"/>
-                                <field name="name"/>
-                                <field name="sequence_id" groups="base.group_no_one"/>
-                                <field name="sequence_code"/>
-                            </group>
-                            <field name="notes" placeholder="Notes ..."/>
-                        </group>
-                    </sheet>
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids" widget="mail_followers"/>
-                        <field name="activity_ids" widget="mail_activity"/>
-                        <field name="message_ids" widget="mail_thread"/>
-                    </div>
-                </form>
-            </field>
-        </record>
 
-        <record id="view_transaction_type_list" model="ir.ui.view">
-            <field name="name">transaction.type.list</field>
-            <field name="model">transaction.type</field>
-            <field name="arch" type="xml">
-                <tree string="Transaction Types">
-                    <field name="name"/>
-                    <field name="sequence"/>
-                    <field name="notes"/>
-                </tree>
-            </field>
-        </record>
-
-        <record id="action_transaction_type_list" model="ir.actions.act_window">
-            <field name="name">Transaction Types</field>
-            <field name="res_model">transaction.type</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                    Create a new Transaction
-                </p>
-                <p>
-                    Transactions allow you to Create New archive type.
-                </p>
-            </field>
-        </record>
 
         <!--        <record id="transaction_type_action_tree" model="ir.ui.view">-->
         <!--            <field name="name">Transaction Types></field>-->
@@ -106,12 +54,6 @@
         </record>
 
         <!-- actions opening views on models -->
-        <record id="transaction_type_action" model="ir.actions.act_window">
-            <field name="name">Transaction Types</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">transaction.type</field>
-            <field name="view_mode">tree</field>
-        </record>
 
         <record id="signature_action" model="ir.actions.act_window">
             <field name="name">Signatures</field>
@@ -120,20 +62,7 @@
             <field name="view_mode">tree</field>
         </record>
 
-        <record id="archive_transactions_action" model="ir.actions.act_window">
-            <field name="name">Archiving Overview</field>
-            <field name="res_model">transaction.type</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="view_mode">kanban,form</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                    Create a new Archive type
-                </p>
-                <p>
-                    The Archive type system allows you to create various archive type.
-                </p>
-            </field>
-        </record>
+
 
         <record id="archive_view_form" model="ir.ui.view">
             <field name="name">Archive Form View</field>
@@ -244,7 +173,7 @@
                    ]"/>
         </record>
         <record id="action_picking_tree_lock" model="ir.actions.act_window">
-            <field name="name">Draft</field>
+            <field name="name">Lock</field>
             <field name="res_model">management.archive</field>
             <field name="type">ir.actions.act_window</field>
             <field name="domain">[('state','=','lock')]</field>
@@ -256,7 +185,7 @@
                    ]"/>
         </record>
         <record id="action_picking_tree_followup" model="ir.actions.act_window">
-            <field name="name">Draft</field>
+            <field name="name">Follow-up</field>
             <field name="res_model">management.archive</field>
             <field name="type">ir.actions.act_window</field>
             <field name="domain">[('state','=','followup')]</field>
@@ -268,7 +197,7 @@
                    ]"/>
         </record>
         <record id="action_picking_tree_reqresponse" model="ir.actions.act_window">
-            <field name="name">Draft</field>
+            <field name="name">Request response</field>
             <field name="res_model">management.archive</field>
             <field name="type">ir.actions.act_window</field>
             <field name="domain">[('state','=','reqresponse')]</field>
@@ -279,8 +208,9 @@
                    (0, 0, {'view_mode': 'form', 'view_id': ref('archive_view_form')}),
                    ]"/>
         </record>
+
         <record id="action_picking_tree_close" model="ir.actions.act_window">
-            <field name="name">Draft</field>
+            <field name="name">Closed</field>
             <field name="res_model">management.archive</field>
             <field name="type">ir.actions.act_window</field>
             <field name="domain">[('state','=','close')]</field>
@@ -290,109 +220,6 @@
                    (0, 0, {'view_mode': 'tree', 'view_id': ref('archive_view_tree')}),
                    (0, 0, {'view_mode': 'form', 'view_id': ref('archive_view_form')}),
                    ]"/>
-        </record>
-
-
-        <record id="transaction_type_kanban" model="ir.ui.view">
-            <field name="name">transaction.type.kanban</field>
-            <field name="model">transaction.type</field>
-            <field name="arch" type="xml">
-                <kanban class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_stock_kanban" create="0">
-                    <field name="name"/>
-                    <field name="color"/>
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div t-attf-class="oe_kanban_card">
-                                <span class="oe_kanban_color_help"
-                                      t-attf-title="In #{kanban_getcolorname(record.color.raw_value)}" role="img"
-                                      t-attf-aria-label="In #{kanban_getcolorname(record.color.raw_value)}"/>
-                                <div class="o_kanban_card_header">
-                                    <!--                                    <div class="o_primary o_kanban_record_title">-->
-                                    <!--                                        <field name="name"/>-->
-                                    <!--                                    </div>-->
-                                    <div class="o_primary" t-if="!selection_mode">
-                                        <a type="object" name="get_archive">
-                                            <h3>
-                                                <field name="name"/>
-                                            </h3>
-                                        </a>
-                                    </div>
-                                    <!--                                    <div class="o_secondary">-->
-                                    <!--                                        <field name="archive_count"/>-->
-                                    <!--                                    </div>-->
-
-                                </div>
-                                <div class="container o_kanban_card_content" t-if="!selection_mode">
-                                    <div class="row">
-                                        <div class="col-6 o_kanban_primary_right">
-                                            <button class="btn btn-primary" name="action_view_archive_ids"
-                                                    type="object">
-                                                <span>
-                                                    <field name="archive_count"/>
-                                                    Archive
-                                                </span>
-                                            </button>
-
-                                        </div>
-                                        <div class="col-6 o_kanban_primary_left">
-                                            <div t-if="record.count_draft.raw_value &gt; 0" class="row">
-                                                <div class="col-9">
-                                                    <a name="get_action_picking_tree_draft" type="object">
-                                                        Draft
-                                                    </a>
-                                                </div>
-                                                <div class="col-3">
-                                                    <field name="count_draft"/>
-                                                </div>
-                                            </div>
-                                            <div t-if="record.count_lock.raw_value &gt; 0" class="row">
-                                                <div class="col-9">
-                                                    <a name="get_action_picking_tree_lock" type="object">
-                                                        Done
-                                                    </a>
-                                                </div>
-                                                <div class="col-3">
-                                                    <field name="count_lock"/>
-                                                </div>
-                                            </div>
-                                            <div t-if="record.count_followup.raw_value &gt; 0" class="row">
-                                                <div class="col-9">
-                                                    <a name="get_action_picking_tree_followup" type="object">
-                                                        FollowUP
-                                                    </a>
-                                                </div>
-                                                <div class="col-3">
-                                                    <field name="count_followup"/>
-                                                </div>
-                                            </div>
-                                            <div t-if="record.count_reqresponse.raw_value &gt; 0" class="row">
-                                                <div class="col-9">
-                                                    <a name="get_action_picking_tree_reqresponse" type="object">
-                                                        Request Response
-                                                    </a>
-                                                </div>
-                                                <div class="col-3">
-                                                    <field name="count_reqresponse"/>
-                                                </div>
-                                            </div>
-                                            <div t-if="record.count_closed.raw_value &gt; 0" class="row">
-                                                <div class="col-9">
-                                                    <a name="get_action_picking_tree_close" type="object">
-                                                        Closed
-                                                    </a>
-                                                </div>
-                                                <div class="col-3">
-                                                    <field name="count_closed"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
         </record>
     </data>
 </odoo>
