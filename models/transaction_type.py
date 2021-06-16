@@ -57,7 +57,7 @@ class TransactionType(models.Model):
         return self._get_action('management_archive.archive_management_action')
 
     count_draft = fields.Integer(compute='_compute_picking_count')
-    count_done = fields.Integer(compute='_compute_picking_count')
+    count_lock = fields.Integer(compute='_compute_picking_count')
     count_followup = fields.Integer(compute='_compute_picking_count')
     count_reqresponse = fields.Integer(compute='_compute_picking_count')
     count_closed = fields.Integer(compute='_compute_picking_count')
@@ -66,7 +66,7 @@ class TransactionType(models.Model):
         # TDE TODO count picking can be done using previous two
         domains = {
             'count_draft': [('state', '=', 'draft')],
-            'count_done': [('state', '=', 'done')],
+            'count_lock': [('state', '=', 'lock')],
             'count_followup': [('state', '=', 'followup')],
             'count_reqresponse': [('state', '=', 'reqresponse')],
             'count_closed': [('state', '=', 'closed')],
@@ -89,8 +89,8 @@ class TransactionType(models.Model):
     def get_action_picking_tree_draft(self):
         return self._get_action('management_archive.action_picking_tree_draft')
 
-    def get_action_picking_tree_done(self):
-        return self._get_action('management_archive.action_picking_tree_done')
+    def get_action_picking_tree_lock(self):
+        return self._get_action('management_archive.action_picking_tree_lock')
 
     def get_action_picking_tree_followup(self):
         return self._get_action('management_archive.action_picking_tree_followup')
