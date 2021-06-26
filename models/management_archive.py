@@ -70,6 +70,6 @@ class ManagementArchive(models.Model):
         res = super(ManagementArchive, self).create(values)
         seq = self.env['ir.sequence'].next_by_code('management.archive') or '/'
         currentYear = datetime.now().year
-        name = str(res['transaction_type'].sequence_code) + "/" + str(currentYear) + "/" + str(seq)
+        name = str(res['transaction_type'].sequence_code) + "-" + str(currentYear) + "-" + str(seq)
         res['name'] = name
         return res
