@@ -2,6 +2,7 @@
 
 from odoo import api, fields, models, _
 from datetime import datetime
+from odoo.exceptions import ValidationError, UserError
 
 AVAILABLE_PRIORITIES = [
     ('0', 'Low'),
@@ -64,6 +65,14 @@ class ManagementArchive(models.Model):
 
     def action_close(self):
         self.state = 'closed'
+
+    def reset_draft(self):
+        self.state = 'draft'
+
+    def unlink(self):
+        if self.state != 'draft':
+            raise ValidationError(_("لا يمكن حذف مكاتبه تم اعتمادها"))
+        return super(ManagementArchive, self).unlink()
 
     @api.model
     def create(self, values):

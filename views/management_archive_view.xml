@@ -28,7 +28,6 @@
         </record>
 
 
-
         <!--        <record id="transaction_type_action_tree" model="ir.ui.view">-->
         <!--            <field name="name">Transaction Types></field>-->
         <!--            <field name="model">transaction.type</field>-->
@@ -63,7 +62,6 @@
         </record>
 
 
-
         <record id="archive_view_form" model="ir.ui.view">
             <field name="name">Archive Form View</field>
             <field name="model">management.archive</field>
@@ -71,14 +69,16 @@
                 <form string="">
                     <header>
                         <button class="oe_highlight" name="action_approve" states="draft" type="object"
-                                groups="management_archive.archive_manager" string="Approve"/>
+                                groups="management_archive.archive_user" string="Approve"/>
                         <button class="oe_highlight" name="action_followup" states="lock" type="object"
-                                groups="management_archive.archive_manager" string="Follow-up"/>
+                                groups="management_archive.archive_user" string="Follow-up"/>
                         <button class="oe_highlight" name="action_request_response" states="lock" type="object"
-                                groups="management_archive.archive_manager" string="Request Response"/>
+                                groups="management_archive.archive_user" string="Request Response"/>
                         <button class="oe_highlight" name="action_close" states="lock,followup,reqresponse"
                                 type="object"
-                                groups="management_archive.archive_manager" string="Close"/>
+                                groups="management_archive.archive_user" string="Close"/>
+                        <button class="oe_highlight" name="reset_draft" type="object"
+                                groups="management_archive.archive_manager" string="Reset to Draft"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -105,7 +105,6 @@
                                 <field name="form_kanban" invisible="1"/>
                                 <field name="transaction_type" attrs="{'invisible':[('form_kanban', '=', True)]}"/>
                                 <field name="signature_key" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-
                                 <field name="signature_desc" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </group>
                             <group>
@@ -117,10 +116,11 @@
                         </group>
                         <notebook>
                             <page string="Description">
-                                <field name="default_description"/>
+                                <field name="default_description" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </page>
                             <page string="Attachment">
-                                <field name="doc_attachment_id" widget="many2many_binary" class="oe_inline"/>
+                                <field name="doc_attachment_id" widget="many2many_binary" class="oe_inline"
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </page>
                         </notebook>
                     </sheet>
@@ -213,7 +213,7 @@
             <field name="name">Closed</field>
             <field name="res_model">management.archive</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="domain">[('state','=','close')]</field>
+            <field name="domain">[('state','=','closed')]</field>
             <field name="view_mode">tree,form</field>
             <field name="view_ids"
                    eval="[(5, 0, 0),
