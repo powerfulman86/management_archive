@@ -32,7 +32,25 @@ class ManagementArchive(models.Model):
     state = fields.Selection(AVAILABLE_STATUS, string='state', tracking=True, default=AVAILABLE_STATUS[0][0],
                              required=True)
 
-    partner_id = fields.Many2one('res.partner', string='Customer', readonly=True,
+    child_ids = fields.One2many(comodel_name='management.archive', inverse_name='parent_id')
+    parent_id = fields.Many2one(comodel_name='management.archive', string='Parent')
+    next = fields.Integer('Next child sequence')
+    children_count = fields.Integer('count', compute="compute_children_count")
+
+    @api.depends('child_ids')
+    def compute_children_count(self):
+        for rec in self:
+            rec.children_count = len(rec.child_ids.ids)
+
+    def action_view_children(self):
+        self.ensure_one()
+        action = self.env.ref('management_archive.archive_management_action')
+        result = action.read()[0]
+        result['context'] = {'default_parent_id': self.id }
+        result['domain'] = "[('id', 'in', " + str(self.child_ids.ids) + ")]"
+        return result
+
+    partner_id = fields.Many2one('management.archive.partner', string='Customer', readonly=True,
                                  states={'draft': [('readonly', False)], 'lock': [('readonly', True)]},
                                  required=True, index=True, tracking=1, )
     subject = fields.Text('Subject')
@@ -81,4 +99,16 @@ class ManagementArchive(models.Model):
         currentYear = datetime.now().year
         name = str(res['transaction_type'].sequence_code) + "-" + str(currentYear) + "-" + str(seq)
         res['name'] = name
+        if res.parent_id:
+            res.parent_id.next +=1
+            res['name'] =res['name']+"-"+str(res.parent_id.next).zfill(3)
         return res
+
+
+class ManagementArchivePartner(models.Model):
+    _name = 'management.archive.partner'
+    _rec_name = "partner_id"
+    _description = 'Management Archive Partner'
+
+    partner_id = fields.Many2one('res.partner', required=True)
+    note = fields.Text('Description')

@@ -22,6 +22,8 @@
 
         <menuitem id="menu_signature_key" name="Signatures" parent="menu_configuration"
                   action="signature_action" sequence="1"/>
+        <menuitem id="menu_archive_partner" name="Partners" parent="menu_configuration"
+                  action="archive_partner_action" sequence="1"/>
 
         <menuitem id="menu_archive_transactions" parent="menu_dashboard" sequence="1"
                   action="archive_transactions_action"/>
